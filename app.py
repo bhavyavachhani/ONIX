@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Universal Dark Theme & Particle Layer Injector
+# 2. Universal Dark Theme & Neon Green Highlight Injector
 st.markdown(
     """
     <div class="particle-container">
@@ -37,7 +37,7 @@ st.markdown(
         background-color: #0e1117 !important;
     }
 
-    /* Target any remaining dynamic padding or white space structures at the bottom */
+    /* Target dynamic padding structures at the bottom */
     div[class^="st-emotion-cache"] {
         background-color: transparent !important;
     }
@@ -55,6 +55,20 @@ st.markdown(
     /* Style the input box placeholder text */
     [data-testid="stChatInputContainer"] textarea::placeholder {
         color: rgba(240, 242, 246, 0.5) !important;
+    }
+
+    /* CRITICAL FIX: Highlight the send icon button with a vibrant neon accent */
+    [data-testid="stChatInputContainer"] button {
+        background-color: transparent !important;
+        border: none !important;
+    }
+
+    [data-testid="stChatInputContainer"] button svg {
+        fill: #00ff96 !important; /* Forces the internal arrow path to bright neon green */
+        color: #00ff96 !important;
+        width: 24px !important;
+        height: 24px !important;
+        filter: drop-shadow(0px 0px 4px rgba(0, 255, 150, 0.6)) !important; /* Adds a subtle electronic glow */
     }
 
     /* Ambient Floating Particle Design */

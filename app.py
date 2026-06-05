@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Complete Full-Bleed Dark UI Layout Overrides
+# 2. Hardcore Dark Theme & Particle Layer Injector
 st.markdown(
     """
     <div class="particle-container">
@@ -26,13 +26,33 @@ st.markdown(
     </div>
 
     <style>
-    /* Force the deep dark color canvas onto every single structural layer */
+    /* 1. Universal Layout Bleed - Dark Mode Overwrite */
     .stApp, 
     [data-testid="stAppViewContainer"], 
     [data-testid="stHeader"], 
     [data-testid="stMainBlockContainer"],
-    .main {
+    .main,
+    [data-testid="stBottom"] {
         background-color: #0e1117 !important;
+    }
+
+    /* 2. Target the exact Streamlit bottom sticky input area wrapper */
+    [data-testid="stBottomBlockContainer"] {
+        background-color: #0e1117 !important;
+    }
+
+    /* 3. Style the interactive text box capsule itself */
+    [data-testid="stChatInputContainer"], 
+    .stChatInputContainer,
+    [data-testid="stChatInputContainer"] textarea {
+        background-color: #1a1f2c !important;
+        color: #f0f2f6 !important;
+        z-index: 20;
+    }
+
+    /* 4. Style the input box placeholder text */
+    [data-testid="stChatInputContainer"] textarea::placeholder {
+        color: rgba(240, 242, 246, 0.5) !important;
     }
 
     /* Ambient Floating Particle Design */
@@ -52,12 +72,11 @@ st.markdown(
         bottom: -20px;
         width: 4px;
         height: 4px;
-        background: rgba(0, 255, 150, 0.15); /* Matrix green tint */
+        background: rgba(0, 255, 150, 0.15);
         border-radius: 50%;
         animation: floatUp 12s infinite linear;
     }
 
-    /* Distribute bubbles across screen dynamically */
     .bubble:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 14s; }
     .bubble:nth-child(2) { left: 25%; animation-delay: 2s; animation-duration: 18s; width: 6px; height: 6px; }
     .bubble:nth-child(3) { left: 45%; animation-delay: 5s; animation-duration: 16s; }
@@ -74,25 +93,11 @@ st.markdown(
         100% { transform: translateY(-105vh); opacity: 0; }
     }
 
-    /* Clean text styling to contrast beautifully against the dark canvas */
+    /* Clean text color rules */
     h2, .stMarkdown p {
         color: #f0f2f6 !important;
         position: relative;
         z-index: 10;
-    }
-    
-    /* Target the text input element container and force it dark */
-    [data-testid="stChatInputContainer"], 
-    .stChatInputContainer,
-    [data-testid="stChatInputContainer"] textarea {
-        background-color: #1a1f2c !important;
-        color: #f0f2f6 !important;
-        z-index: 20;
-    }
-
-    /* Style the placeholder 'Say something...' text color */
-    [data-testid="stChatInputContainer"] textarea::placeholder {
-        color: rgba(240, 242, 246, 0.5) !important;
     }
     </style>
     """,
@@ -103,7 +108,7 @@ st.markdown(
 if "animated" not in st.session_state:
     st.session_state.animated = False
 
-# 4. Clean Site Loading Animation Sequence
+# 4. Loading Animation Sequence
 title_placeholder = st.empty()
 
 if not st.session_state.animated:
@@ -131,12 +136,12 @@ client = Groq(api_key=api_key)
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# 7. Render Chat Logs Instantly
+# 7. Render Chat Logs Instating
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# 8. Prompt Box Input & Pipeline
+# 8. Input Box Pipeline
 if prompt := st.chat_input("Say something..."):
     
     with st.chat_message("user"):

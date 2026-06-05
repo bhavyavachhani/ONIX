@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Universal Dark Theme & Complete Button Overrides
+# 2. Universal Dark Theme & Gemini Blue Button Injector
 st.markdown(
     """
     <div class="particle-container">
@@ -57,25 +57,23 @@ st.markdown(
         color: rgba(240, 242, 246, 0.5) !important;
     }
 
-    /* HARDCORE FIX: Target every button layer, icon, and button path explicitly */
+    /* Remove button backgrounds entirely */
     button[data-testid="stChatInputSubmitButton"],
     .stChatInputContainer button,
-    [data-testid="stChatInputContainer"] button,
-    div[class*="stChatInputSubmitButton"] button {
+    [data-testid="stChatInputContainer"] button {
         background-color: transparent !important;
         border: none !important;
     }
 
-    /* Target the SVG arrow asset inside the submit container */
+    /* CLEAN BLUE FIX: Turn the arrow a solid Gemini blue. No glow, no fancy shine. */
     button[data-testid="stChatInputSubmitButton"] svg,
     .stChatInputContainer button svg,
     [data-testid="stChatInputContainer"] button svg,
-    div[class*="stChatInputSubmitButton"] button svg,
     button svg path {
-        fill: #00ff96 !important; /* Force neon green fill */
-        color: #00ff96 !important; /* Force neon green color line */
-        stroke: #00ff96 !important; /* Force stroke override */
-        filter: drop-shadow(0px 0px 5px rgba(0, 255, 150, 0.8)) !important; /* Glow element */
+        fill: #1a73e8 !important; 
+        color: #1a73e8 !important; 
+        stroke: #1a73e8 !important;
+        filter: none !important; /* Ensures absolutely zero extra glow or shine */
     }
 
     /* Ambient Floating Particle Design */
@@ -95,7 +93,7 @@ st.markdown(
         bottom: -20px;
         width: 4px;
         height: 4px;
-        background: rgba(0, 255, 150, 0.15);
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
         animation: floatUp 12s infinite linear;
     }

@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Universal Dark Theme & Neon Green Highlight Injector
+# 2. Universal Dark Theme & Complete Button Overrides
 st.markdown(
     """
     <div class="particle-container">
@@ -57,18 +57,25 @@ st.markdown(
         color: rgba(240, 242, 246, 0.5) !important;
     }
 
-    /* CRITICAL FIX: Highlight the send icon button with a vibrant neon accent */
-    [data-testid="stChatInputContainer"] button {
+    /* HARDCORE FIX: Target every button layer, icon, and button path explicitly */
+    button[data-testid="stChatInputSubmitButton"],
+    .stChatInputContainer button,
+    [data-testid="stChatInputContainer"] button,
+    div[class*="stChatInputSubmitButton"] button {
         background-color: transparent !important;
         border: none !important;
     }
 
-    [data-testid="stChatInputContainer"] button svg {
-        fill: #00ff96 !important; /* Forces the internal arrow path to bright neon green */
-        color: #00ff96 !important;
-        width: 24px !important;
-        height: 24px !important;
-        filter: drop-shadow(0px 0px 4px rgba(0, 255, 150, 0.6)) !important; /* Adds a subtle electronic glow */
+    /* Target the SVG arrow asset inside the submit container */
+    button[data-testid="stChatInputSubmitButton"] svg,
+    .stChatInputContainer button svg,
+    [data-testid="stChatInputContainer"] button svg,
+    div[class*="stChatInputSubmitButton"] button svg,
+    button svg path {
+        fill: #00ff96 !important; /* Force neon green fill */
+        color: #00ff96 !important; /* Force neon green color line */
+        stroke: #00ff96 !important; /* Force stroke override */
+        filter: drop-shadow(0px 0px 5px rgba(0, 255, 150, 0.8)) !important; /* Glow element */
     }
 
     /* Ambient Floating Particle Design */

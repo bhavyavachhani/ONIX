@@ -11,39 +11,74 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Inject Custom Gemini-Inspired Shifting Gradient Background CSS
+# 2. Inject Particle Matrix Canvas & Core Structural Overrides
 st.markdown(
     """
+    <div class="particle-container">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
     <style>
-    /* Gradient keyframe animation for the background canvas */
-    @keyframes geminiFlow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
+    /* Force structural background color */
     .stApp {
-        background: linear-gradient(-45deg, #131314, #18122B, #0F172A, #131314) !important;
-        background-size: 400% 400% !important;
-        animation: geminiFlow 15s ease infinite !important;
-    }
-    
-    /* Clean text styling to contrast beautifully against the deep tones */
-    h2 {
-        color: #e3e3e3 !important;
-        font-family: "Google Sans", Arial, sans-serif;
-        font-weight: 500 !important;
-        letter-spacing: -0.5px;
-    }
-    
-    .stMarkdown p {
-        color: #e3e3e3 !important;
+        background-color: #0e1117 !important;
     }
 
-    /* Make the default input field frame blend cleanly into the canvas background */
+    /* Ambient Floating Particle Design */
+    .particle-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .bubble {
+        position: absolute;
+        bottom: -20px;
+        width: 4px;
+        height: 4px;
+        background: rgba(0, 255, 150, 0.15); /* Sleek Matrix green tint at low opacity */
+        border-radius: 50%;
+        animation: floatUp 12s infinite linear;
+    }
+
+    /* Distribute bubbles across screen dynamically */
+    .bubble:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 14s; }
+    .bubble:nth-child(2) { left: 25%; animation-delay: 2s; animation-duration: 18s; width: 6px; height: 6px; }
+    .bubble:nth-child(3) { left: 45%; animation-delay: 5s; animation-duration: 16s; }
+    .bubble:nth-child(4) { left: 60%; animation-delay: 1s; animation-duration: 22s; }
+    .bubble:nth-child(5) { left: 75%; animation-delay: 7s; animation-duration: 15s; width: 5px; height: 5px; }
+    .bubble:nth-child(6) { left: 90%; animation-delay: 3s; animation-duration: 19s; }
+    .bubble:nth-child(7) { left: 35%; animation-delay: 9s; animation-duration: 25s; }
+    .bubble:nth-child(8) { left: 80%; animation-delay: 4s; animation-duration: 13s; }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(-105vh); opacity: 0; }
+    }
+
+    /* Keep text rendering completely readable above the particles */
+    h2, .stMarkdown p {
+        color: #f0f2f6 !important;
+        position: relative;
+        z-index: 10;
+    }
+    
     .stChatInputContainer {
-        background-color: rgba(30, 30, 32, 0.6) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        z-index: 20;
     }
     </style>
     """,

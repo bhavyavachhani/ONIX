@@ -81,8 +81,18 @@ st.markdown(
         z-index: 10;
     }
     
-    .stChatInputContainer {
+    /* Target the text input element container and force it dark */
+    [data-testid="stChatInputContainer"], 
+    .stChatInputContainer,
+    [data-testid="stChatInputContainer"] textarea {
+        background-color: #1a1f2c !important;
+        color: #f0f2f6 !important;
         z-index: 20;
+    }
+
+    /* Style the placeholder 'Say something...' text color */
+    [data-testid="stChatInputContainer"] textarea::placeholder {
+        color: rgba(240, 242, 246, 0.5) !important;
     }
     </style>
     """,

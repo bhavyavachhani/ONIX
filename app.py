@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Universal Dark Theme & Direct Interface Styling
+# 2. Universal Dark Theme & Complete Pill-Input + Custom Send Icon Override
 st.markdown(
     """
     <div class="particle-container">
@@ -42,13 +42,15 @@ st.markdown(
         background-color: transparent !important;
     }
 
-    /* DIRECT OVERRIDE: Premium Gemini-style Rounded Input Capsule */
+    /* Premium Gemini-style Rounded Input Capsule */
     [data-testid="stChatInputContainer"], 
     .stChatInputContainer {
         background-color: #1a1f2c !important;
         border-radius: 28px !important; /* Premium curved capsule shape */
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        padding: 4px 14px !important;
+        padding: 6px 14px !important;
+        display: flex !important;
+        align-items: center !important;
     }
 
     /* Sync internal input textarea */
@@ -57,21 +59,32 @@ st.markdown(
         color: #f0f2f6 !important;
     }
 
-    /* Clear submit button container artifacts */
+    /* Target the submit button container */
     [data-testid="stChatInputSubmitButton"],
     .stChatInputContainer button {
         background-color: transparent !important;
         border: none !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
-    /* DIRECT ACCENT OVERRIDE: Solid Gemini Blue Arrow */
+    /* HIDE STREAMLIT'S DEFAULT OLD ARROW SVG COMPLETELY */
     [data-testid="stChatInputSubmitButton"] svg,
-    .stChatInputContainer button svg,
-    [data-testid="stChatInputSubmitButton"] svg path {
-        fill: #1a73e8 !important; 
-        color: #1a73e8 !important; 
-        stroke: #1a73e8 !important;
-        filter: none !important; /* Strips out any accidental shine or glowing artifacts */
+    .stChatInputContainer button svg {
+        display: none !important;
+    }
+
+    /* REPLACE WITH MODERNISED CLEAN SEND SYMBOL (Solid Gemini Blue) */
+    [data-testid="stChatInputSubmitButton"]::before,
+    .stChatInputContainer button::before {
+        content: "➤" !important; /* Clean modern directional send arrowhead */
+        color: #1a73e8 !important; /* Solid Gemini Blue */
+        font-size: 20px !important;
+        display: inline-block !important;
+        transform: rotate(0deg) !important;
+        filter: none !important; /* Zero extra unwanted glowing text shadows */
+        cursor: pointer !important;
     }
 
     /* Minimalist Ambient Particle System */

@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Universal Dark Theme & Gemini Blue Button Injector
+# 2. Premium Dark Theme & Sleek Pill-Shaped Input Design
 st.markdown(
     """
     <div class="particle-container">
@@ -37,35 +37,53 @@ st.markdown(
         background-color: #0e1117 !important;
     }
 
-    /* Target dynamic padding structures at the bottom */
+    /* Remove rigid default layout backgrounds */
     div[class^="st-emotion-cache"] {
         background-color: transparent !important;
     }
 
-    /* Style the interactive text box capsule itself */
+    /* REDESIGN: Sleek, pill-shaped input capsule with smooth curves */
     [data-testid="stChatInputContainer"], 
-    .stChatInputContainer,
-    [data-testid="stChatInputContainer"] textarea {
+    .stChatInputContainer {
         background-color: #1a1f2c !important;
-        color: #f0f2f6 !important;
+        border-radius: 28px !important; /* Smooth pill-shaped curves */
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 4px 14px !important;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
         z-index: 20;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Smooth focus ring effect when interacting with the prompt box */
+    [data-testid="stChatInputContainer"]:focus-within {
+        border-color: rgba(26, 115, 232, 0.4) !important; /* Soft Gemini Blue border highlight */
+        box-shadow: 0 0 0 1px rgba(26, 115, 232, 0.2) !important;
+    }
+
+    /* Textarea element alignment adjustments */
+    [data-testid="stChatInputContainer"] textarea {
+        background-color: transparent !important;
+        color: #f0f2f6 !important;
+        font-family: Inter, sans-serif !important;
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+        padding-top: 8px !important;
     }
 
     /* Style the input box placeholder text */
     [data-testid="stChatInputContainer"] textarea::placeholder {
-        color: rgba(240, 242, 246, 0.5) !important;
+        color: rgba(240, 242, 246, 0.4) !important;
     }
 
-    /* Remove button backgrounds entirely */
+    /* Keep background clean around submit button */
     button[data-testid="stChatInputSubmitButton"],
     .stChatInputContainer button,
     [data-testid="stChatInputContainer"] button {
         background-color: transparent !important;
         border: none !important;
+        margin-right: 4px !important;
     }
 
-    /* CLEAN BLUE FIX: Turn the arrow a solid Gemini blue. No glow, no fancy shine. */
+    /* Turn the arrow a clean, solid Gemini blue with no glow */
     button[data-testid="stChatInputSubmitButton"] svg,
     .stChatInputContainer button svg,
     [data-testid="stChatInputContainer"] button svg,
@@ -73,7 +91,7 @@ st.markdown(
         fill: #1a73e8 !important; 
         color: #1a73e8 !important; 
         stroke: #1a73e8 !important;
-        filter: none !important; /* Ensures absolutely zero extra glow or shine */
+        filter: none !important; 
     }
 
     /* Ambient Floating Particle Design */

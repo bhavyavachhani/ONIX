@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Inject Particle Matrix Canvas & Core Structural Overrides
+# 2. Complete Full-Bleed Dark UI Layout Overrides
 st.markdown(
     """
     <div class="particle-container">
@@ -26,8 +26,12 @@ st.markdown(
     </div>
 
     <style>
-    /* Force structural background color */
-    .stApp {
+    /* Force the deep dark color canvas onto every single structural layer */
+    .stApp, 
+    [data-testid="stAppViewContainer"], 
+    [data-testid="stHeader"], 
+    [data-testid="stMainBlockContainer"],
+    .main {
         background-color: #0e1117 !important;
     }
 
@@ -48,7 +52,7 @@ st.markdown(
         bottom: -20px;
         width: 4px;
         height: 4px;
-        background: rgba(0, 255, 150, 0.15); /* Sleek Matrix green tint at low opacity */
+        background: rgba(0, 255, 150, 0.15); /* Matrix green tint */
         border-radius: 50%;
         animation: floatUp 12s infinite linear;
     }
@@ -70,7 +74,7 @@ st.markdown(
         100% { transform: translateY(-105vh); opacity: 0; }
     }
 
-    /* Keep text rendering completely readable above the particles */
+    /* Clean text styling to contrast beautifully against the dark canvas */
     h2, .stMarkdown p {
         color: #f0f2f6 !important;
         position: relative;

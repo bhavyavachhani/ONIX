@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Premium Dark Theme & Sleek Pill-Shaped Input Design
+# 2. Universal Dark Theme & Particle Framework Styling
 st.markdown(
     """
     <div class="particle-container">
@@ -37,61 +37,9 @@ st.markdown(
         background-color: #0e1117 !important;
     }
 
-    /* Remove rigid default layout backgrounds */
+    /* Target dynamic padding structures at the bottom */
     div[class^="st-emotion-cache"] {
         background-color: transparent !important;
-    }
-
-    /* REDESIGN: Sleek, pill-shaped input capsule with smooth curves */
-    [data-testid="stChatInputContainer"], 
-    .stChatInputContainer {
-        background-color: #1a1f2c !important;
-        border-radius: 28px !important; /* Smooth pill-shaped curves */
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        padding: 4px 14px !important;
-        transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
-        z-index: 20;
-    }
-
-    /* Smooth focus ring effect when interacting with the prompt box */
-    [data-testid="stChatInputContainer"]:focus-within {
-        border-color: rgba(26, 115, 232, 0.4) !important; /* Soft Gemini Blue border highlight */
-        box-shadow: 0 0 0 1px rgba(26, 115, 232, 0.2) !important;
-    }
-
-    /* Textarea element alignment adjustments */
-    [data-testid="stChatInputContainer"] textarea {
-        background-color: transparent !important;
-        color: #f0f2f6 !important;
-        font-family: Inter, sans-serif !important;
-        font-size: 15px !important;
-        line-height: 1.5 !important;
-        padding-top: 8px !important;
-    }
-
-    /* Style the input box placeholder text */
-    [data-testid="stChatInputContainer"] textarea::placeholder {
-        color: rgba(240, 242, 246, 0.4) !important;
-    }
-
-    /* Keep background clean around submit button */
-    button[data-testid="stChatInputSubmitButton"],
-    .stChatInputContainer button,
-    [data-testid="stChatInputContainer"] button {
-        background-color: transparent !important;
-        border: none !important;
-        margin-right: 4px !important;
-    }
-
-    /* Turn the arrow a clean, solid Gemini blue with no glow */
-    button[data-testid="stChatInputSubmitButton"] svg,
-    .stChatInputContainer button svg,
-    [data-testid="stChatInputContainer"] button svg,
-    button svg path {
-        fill: #1a73e8 !important; 
-        color: #1a73e8 !important; 
-        stroke: #1a73e8 !important;
-        filter: none !important; 
     }
 
     /* Ambient Floating Particle Design */
@@ -143,11 +91,55 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# 3. Tracking First-Time Page Load Animation State
+# 3. DOM Injection Matrix (Forces the rounded pill shape past Streamlit's structural limits)
+st.components.v1.html(
+    """
+    <script>
+    function styleInputBox() {
+        // Look up all text areas on the page
+        const textareas = window.parent.document.querySelectorAll('textarea');
+        textareas.forEach(textarea => {
+            // Traverse upward to locate the core wrapping chat capsule frame
+            const container = textarea.closest('[data-testid="stChatInputContainer"]');
+            if (container) {
+                // Apply the deep pill curves layout adjustments
+                container.style.borderRadius = '32px';
+                container.style.backgroundColor = '#1a1f2c';
+                container.style.border = '1px solid rgba(255, 255, 255, 0.08)';
+                container.style.padding = '4px 12px';
+                
+                // Adjust text content element margins inside the capsule
+                textarea.style.color = '#f0f2f6';
+                
+                // Locate the internal SVG submit arrow asset
+                const svg = container.querySelector('svg');
+                if (svg) {
+                    svg.style.fill = '#1a73e8';
+                    svg.style.color = '#1a73e8';
+                    if(svg.querySelector('path')) {
+                        svg.querySelector('path').style.fill = '#1a73e8';
+                    }
+                    // Strip any lingering glowing artifacts
+                    svg.style.filter = 'none';
+                }
+            }
+        });
+    }
+
+    // Run layout adjustments immediately and loop continuously to track structural re-renders
+    setTimeout(styleInputBox, 200);
+    setInterval(styleInputBox, 1000);
+    </script>
+    """,
+    height=0,
+    width=0
+)
+
+# 4. Tracking First-Time Page Load Animation State
 if "animated" not in st.session_state:
     st.session_state.animated = False
 
-# 4. Loading Animation Sequence
+# 5. Loading Animation Sequence
 title_placeholder = st.empty()
 
 if not st.session_state.animated:
@@ -162,7 +154,7 @@ if not st.session_state.animated:
 else:
     title_placeholder.markdown("## ONIX")
 
-# 5. Secure API Key Retrieval
+# 6. Secure API Key Retrieval
 api_key = st.secrets.get("GROQ_API_KEY") or os.environ.get("GROQ_API_KEY")
 
 if not api_key:
@@ -171,16 +163,16 @@ if not api_key:
 
 client = Groq(api_key=api_key)
 
-# 6. Chat History Session State
+# 7. Chat History Session State
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# 7. Render Chat Logs Instantly
+# 8. Render Chat Logs Instantly
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# 8. Input Box Pipeline
+# 9. Input Box Pipeline
 if prompt := st.chat_input("Say something..."):
     
     with st.chat_message("user"):

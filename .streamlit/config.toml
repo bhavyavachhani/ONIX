@@ -1,0 +1,12 @@
+[theme]
+primaryColor = "#00FF66"          # Neon Matrix Green
+backgroundColor = "#0A0E17"      # Deep Space Dark Blue
+secondaryBackgroundColor = "#161F30" # Sleek Component Gray/Blue
+textColor = "#FFFFFF"            # Crisp White Text
+font = "monospace"               # Terminal style font
+[theme]
+primaryColor = "#00ff96"
+backgroundColor = "#0e1117"
+secondaryBackgroundColor = "#1a1f2c"
+textColor = "#f0f2f6"
+base = "dark"

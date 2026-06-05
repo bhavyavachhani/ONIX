@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Hardcore Dark Theme & Particle Layer Injector
+# 2. Universal Dark Theme & Particle Layer Injector
 st.markdown(
     """
     <div class="particle-container">
@@ -26,31 +26,33 @@ st.markdown(
     </div>
 
     <style>
-    /* 1. Universal Layout Bleed - Dark Mode Overwrite */
+    /* Absolute global canvas reset */
     .stApp, 
     [data-testid="stAppViewContainer"], 
     [data-testid="stHeader"], 
     [data-testid="stMainBlockContainer"],
     .main,
-    [data-testid="stBottom"] {
-        background-color: #0e1117 !important;
-    }
-
-    /* 2. Target the exact Streamlit bottom sticky input area wrapper */
+    [data-testid="stBottom"],
     [data-testid="stBottomBlockContainer"] {
         background-color: #0e1117 !important;
     }
 
-    /* 3. Style the interactive text box capsule itself */
+    /* Target any remaining dynamic padding or white space structures at the bottom */
+    div[class^="st-emotion-cache"] {
+        background-color: transparent !important;
+    }
+
+    /* Style the interactive text box capsule itself */
     [data-testid="stChatInputContainer"], 
     .stChatInputContainer,
     [data-testid="stChatInputContainer"] textarea {
         background-color: #1a1f2c !important;
         color: #f0f2f6 !important;
         z-index: 20;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
 
-    /* 4. Style the input box placeholder text */
+    /* Style the input box placeholder text */
     [data-testid="stChatInputContainer"] textarea::placeholder {
         color: rgba(240, 242, 246, 0.5) !important;
     }
@@ -136,7 +138,7 @@ client = Groq(api_key=api_key)
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# 7. Render Chat Logs Instating
+# 7. Render Chat Logs Instantly
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
